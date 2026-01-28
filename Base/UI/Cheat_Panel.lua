@@ -67,22 +67,26 @@ end
 function OnPanelTitleClicked()
 	if(m_CheatPanelState == 0) then
 		UI.PlaySound("Tech_Tray_Slide_Open");
-		Controls.CheatPanel:SetSizeY(317);
+		Controls.CheatPanel:SetSizeY(357);
 		Controls.ButtonGroup:SetHide(false);
+		Controls.ButtonGroup8:SetHide(false);
 		Controls.ButtonSep2:SetHide(false);
 		Controls.ButtonSep3:SetHide(false);
 		Controls.ButtonSep4:SetHide(false);
 		Controls.ButtonSep5:SetHide(false);
+		Controls.ButtonSep6:SetHide(false);
 		Controls.CheatButtonErabg:SetDisabled(true);		
 		m_CheatPanelState = 1;
 	else
 		UI.PlaySound("Tech_Tray_Slide_Closed");
 		Controls.CheatPanel:SetSizeY(25);
 		Controls.ButtonGroup:SetHide(true);
+		Controls.ButtonGroup8:SetHide(true);
 		Controls.ButtonSep2:SetHide(true);
 		Controls.ButtonSep3:SetHide(true);
 		Controls.ButtonSep4:SetHide(true);
 		Controls.ButtonSep5:SetHide(true);
+		Controls.ButtonSep6:SetHide(true);
 		m_CheatPanelState = 0;
 	end	
 end
@@ -134,6 +138,11 @@ local function InitializeControls()
 	Controls.CheatButtonCorps:RegisterCallback(Mouse.eLClick, UnitFormCorps);
 	Controls.CheatButtonArmy:RegisterCallback(Mouse.eLClick, UnitFormArmy);			
 	Controls.CheatButtonDiplo:RegisterCallback(Mouse.eLClick, ChangeDiplomaticFavor);
+	Controls.CheatButtonForceDiplo:RegisterCallback(Mouse.eLClick, ForceDiplomacy);
+	Controls.CheatButtonRestoreMov:RegisterCallback(Mouse.eLClick, RestoreMovement);
+	Controls.CheatButtonKillUnit:RegisterCallback(Mouse.eLClick, KillUnit);
+	Controls.CheatButtonMakeFreeCity:RegisterCallback(Mouse.eLClick, MakeFreeCityCheat);
+	Controls.CheatButtonControlAll:RegisterCallback(Mouse.eLClick, ToggleControlAll);
 	Controls.CheatSpawnBuilder:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over") end);
 	Controls.CheatSpawnBuilder:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over") end);
 	Controls.CheatButtonCityHeal:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over") end);

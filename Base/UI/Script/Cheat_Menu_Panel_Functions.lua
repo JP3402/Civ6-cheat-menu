@@ -22,122 +22,143 @@ local pNewFavor						= 100;
 local m_hideCheatPanel				= false;
 local m_IsLoading:boolean			= false;
 local m_IsAttached:boolean			= false;
+local m_ControlOtherCivs			= false;
+
+function GetCurrentTargetPlayerID()
+	if m_ControlOtherCivs and ExposedMembers.MOD_CheatMenu and ExposedMembers.MOD_CheatMenu.iPlayer then
+		return ExposedMembers.MOD_CheatMenu.iPlayer;
+	end
+	return Game.GetLocalPlayer();
+end
 
 -- // ----------------------------------------------------------------------------------------------
 -- // MENU BUTTON FUNCTIONS
 -- // ----------------------------------------------------------------------------------------------
 
 function ChangeLUXURYResources(playerID)
+	local targetID = GetCurrentTargetPlayerID();
  	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.ChangeLUXURYResources(playerID);
+		ExposedMembers.MOD_CheatMenu.ChangeLUXURYResources(targetID);
 	end
 end
 function ChangeSTRATEGICResources(playerID)
+	local targetID = GetCurrentTargetPlayerID();
  	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.ChangeSTRATEGICResources(playerID);
+		ExposedMembers.MOD_CheatMenu.ChangeSTRATEGICResources(targetID);
 	end
 end
 function ChangeEraScore()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-        ExposedMembers.MOD_CheatMenu.ChangeEraScore(playerID);
+        ExposedMembers.MOD_CheatMenu.ChangeEraScore(targetID);
     end
 	RefreshActionPanel();
 end
 function ChangeEraScoreBack()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-        ExposedMembers.MOD_CheatMenu.ChangeEraScoreBack(playerID);
+        ExposedMembers.MOD_CheatMenu.ChangeEraScoreBack(targetID);
     end
 	RefreshActionPanel();
 end
 function ChangeGold()
 	local pNewGold:number = tonumber(Controls.GoldAmount:GetText());
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangeGold(playerID, pNewGold); 
+		ExposedMembers.MOD_CheatMenu.ChangeGold(targetID, pNewGold);
     end
 end
 function ChangeGoldMore()
 	local pNewGold = 100000;
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-        ExposedMembers.MOD_CheatMenu.ChangeGold(playerID, pNewGold); 
+        ExposedMembers.MOD_CheatMenu.ChangeGold(targetID, pNewGold);
     end
 end
 function CompleteProduction()
 	local pNewProduction:number = tonumber(Controls.ProductionAmount:GetText());
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.CompleteProduction(playerID, pNewProduction);
+		ExposedMembers.MOD_CheatMenu.CompleteProduction(targetID, pNewProduction);
 	end
 end
 function CompleteAllResearch()
- 	local pTechs = pPlayer:GetTechs()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.CompleteAllResearch(playerID);	
+		ExposedMembers.MOD_CheatMenu.CompleteAllResearch(targetID);
 	end		
 end
 function CompleteAllCivic()
- 	local pTechs = pPlayer:GetCulture()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.CompleteAllCivic(playerID);	
+		ExposedMembers.MOD_CheatMenu.CompleteAllCivic(targetID);
 	end		
 end
 function CompleteResearch()
- 	local pTechs = pPlayer:GetTechs()
+	local targetID = GetCurrentTargetPlayerID();
+	local pTargetPlayer = Players[targetID];
+	local pTechs = pTargetPlayer:GetTechs()
 	local pRTech = pTechs:GetResearchingTech()	
 	if pRTech >= 0 then
 		local pCost = pTechs:GetResearchCost(pRTech)	
 		local pProgress = pTechs:GetResearchProgress(pRTech)
 		local pResearchComplete = (pCost - pProgress)
 		if pPlayer:IsHuman() then		
-			ExposedMembers.MOD_CheatMenu.CompleteResearch(playerID, pResearchComplete);				
+			ExposedMembers.MOD_CheatMenu.CompleteResearch(targetID, pResearchComplete);
 		end		
 	end
 end
 function CompleteCivic()
- 	local pCivics = pPlayer:GetCulture()
+	local targetID = GetCurrentTargetPlayerID();
+	local pTargetPlayer = Players[targetID];
+	local pCivics = pTargetPlayer:GetCulture()
 	local pRCivic = pCivics:GetProgressingCivic()
 	if pRCivic >= 0 then		
 		local pCost = pCivics:GetCultureCost(pRCivic)	
 		local pProgress = pCivics:GetCulturalProgress(pRCivic)
 		local pCivicComplete = (pCost - pProgress)
 		if pPlayer:IsHuman() then		
-			ExposedMembers.MOD_CheatMenu.CompleteCivic(playerID, pCivicComplete);				
+			ExposedMembers.MOD_CheatMenu.CompleteCivic(targetID, pCivicComplete);
 		end
 	end	
 end
 function ChangeFaith()
 	local pNewFaith:number = tonumber(Controls.FaithAmount:GetText());
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangeFaith(playerID, pNewFaith);
+		ExposedMembers.MOD_CheatMenu.ChangeFaith(targetID, pNewFaith);
     end
 end
 function ChangePopulation()
 	local pCity = UI.GetHeadSelectedCity();
 	if pCity ~= nil and pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangePopulation(playerID, pCity, pNewPopulation);
+		ExposedMembers.MOD_CheatMenu.ChangePopulation(pCity:GetOwner(), pCity, pNewPopulation);
 	end
 end
 function RestoreCityHealth()
- 	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.RestoreCityHealth(playerID);
+	local pCity = UI.GetHeadSelectedCity();
+	if pCity ~= nil and pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.RestoreCityHealth(pCity:GetOwner());
 	end
 end
 function ChangeCityLoyalty()
- 	if pPlayer:IsHuman() then		
-		ExposedMembers.MOD_CheatMenu.ChangeCityLoyalty(playerID);
+	local pCity = UI.GetHeadSelectedCity();
+	if pCity ~= nil and pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.ChangeCityLoyalty(pCity:GetOwner());
 	end
 end
 function DestroyCity()
 	local pCity = UI.GetHeadSelectedCity();
 	if pCity ~= nil and pPlayer:IsHuman() then
-		local pCityName:string = Locale.Lookup(pCity:GetName());
-		local pCityPop:string = Locale.Lookup(pCity:GetPopulation());
-		ExposedMembers.MOD_CheatMenu.DestroyCity(playerID);	
+		ExposedMembers.MOD_CheatMenu.DestroyCity(pCity:GetOwner());
 	end
 end
 function UnitPromote()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-		ExposedMembers.MOD_CheatMenu.UnitPromote(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+		ExposedMembers.MOD_CheatMenu.UnitPromote(ownerID, unitID);
 		UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
@@ -146,7 +167,8 @@ function UnitMovementChange()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitMovementChange(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitMovementChange(ownerID, unitID);
 		UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
@@ -155,7 +177,8 @@ function UnitAddMovement()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitAddMovement(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitAddMovement(ownerID, unitID);
 		UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
     end
@@ -168,8 +191,9 @@ function OnDuplicate()
 	local pUnit = UI.GetHeadSelectedUnit();
 	if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
+		local ownerID = pUnit:GetOwner();
 		local unitType:string = GameInfo.Units[pUnit:GetUnitType()].UnitType;
-		ExposedMembers.MOD_CheatMenu.OnDuplicate(playerID, unitID, unitType, pRelig);
+		ExposedMembers.MOD_CheatMenu.OnDuplicate(ownerID, unitID, unitType, pRelig);
     end
 end
 
@@ -177,7 +201,8 @@ function UnitHealChange()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitHealChange(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitHealChange(ownerID, unitID);
     	UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
@@ -186,7 +211,8 @@ function UnitHealAllChange()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitHealAllChange(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitHealAllChange(ownerID, unitID);
     	UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
@@ -195,7 +221,8 @@ function UnitFormCorps()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitFormCorps(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitFormCorps(ownerID, unitID);
     	UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
@@ -204,41 +231,85 @@ function UnitFormArmy()
 	local pUnit = UI.GetHeadSelectedUnit();
     if pUnit ~= nil and pPlayer:IsHuman() then
 		local unitID = pUnit:GetID();
-        ExposedMembers.MOD_CheatMenu.UnitFormArmy(playerID, unitID);
+		local ownerID = pUnit:GetOwner();
+        ExposedMembers.MOD_CheatMenu.UnitFormArmy(ownerID, unitID);
     	UI:DeselectUnitID(unitID);
 		UI:SelectUnitID(unitID);
 	end
 end
 function MakeFreeCity()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.MakeFreeCity(playerID, pCity);
+		ExposedMembers.MOD_CheatMenu.MakeFreeCity(targetID, ExposedMembers.MOD_CheatMenu.iCity);
     end
 end
 function FreeBuilder()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.FreeBuilder(playerID, pCity);
+		ExposedMembers.MOD_CheatMenu.FreeBuilder(targetID, ExposedMembers.MOD_CheatMenu.iCity);
     end
 end
 function FreeSettler()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.FreeSettler(playerID, pCity);
+		ExposedMembers.MOD_CheatMenu.FreeSettler(targetID, ExposedMembers.MOD_CheatMenu.iCity);
     end
 end
 function ChangeEnvoy()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangeEnvoy(playerID, pNewEnvoy);
+		ExposedMembers.MOD_CheatMenu.ChangeEnvoy(targetID, pNewEnvoy);
     end
 end
 
 function ChangeDiplomaticFavor()
 	local pNewFavor:number = tonumber(Controls.DiploAmount:GetText());
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangeDiplomaticFavor(playerID, pNewFavor);
+		ExposedMembers.MOD_CheatMenu.ChangeDiplomaticFavor(targetID, pNewFavor);
     end
 end
-function ChangeGovPoints()
+
+function ForceDiplomacy()
+	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() then
-		ExposedMembers.MOD_CheatMenu.ChangeGovPoints(playerID, pNewGP);
+		ExposedMembers.MOD_CheatMenu.ForceDiplomacy(targetID, 100);
+    end
+end
+
+function RestoreMovement()
+	local pUnit = UI.GetHeadSelectedUnit();
+	if pUnit ~= nil and pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.RestoreMovement(pUnit:GetOwner(), pUnit:GetID());
+	end
+end
+
+function KillUnit()
+	local pUnit = UI.GetHeadSelectedUnit();
+	if pUnit ~= nil and pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.KillUnit(pUnit:GetOwner(), pUnit:GetID());
+	end
+end
+
+function MakeFreeCityCheat()
+	local targetID = GetCurrentTargetPlayerID();
+	if pPlayer:IsHuman() and ExposedMembers.MOD_CheatMenu.iCity then
+		ExposedMembers.MOD_CheatMenu.MakeFreeCity(targetID, ExposedMembers.MOD_CheatMenu.iCity);
+	end
+end
+
+function ToggleControlAll()
+	m_ControlOtherCivs = not m_ControlOtherCivs;
+	if m_ControlOtherCivs then
+		Controls.ControlAllLabel:SetColor(0, 255, 0, 255);
+	else
+		Controls.ControlAllLabel:SetColor(200, 200, 200, 255);
+	end
+end
+function ChangeGovPoints()
+	local targetID = GetCurrentTargetPlayerID();
+	if pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.ChangeGovPoints(targetID, pNewGP);
     end
 end
 function RevealAll()

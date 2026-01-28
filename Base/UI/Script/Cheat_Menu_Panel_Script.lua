@@ -102,13 +102,11 @@ function ChangePopulation(playerID, pCity, pNewPopulation)
 		end
 	end
 end
-function MakeFreeCity(playerID, pCity)
+function MakeFreeCity(playerID, pCityID)
 	local pPlayer = Players[playerID]
-	if iPlayer == playerID then
-		local pCity = pPlayer:GetCities():FindID(iCity)	
-		if pCity ~= nil then
-			--CityManager.TransferCityToFreeCities(pCity);
-		end	
+	local pCity = pPlayer:GetCities():FindID(pCityID)
+	if pCity ~= nil then
+		CityManager.TransferCityToFreeCities(pCity);
 	end
 end
 function FreeBuilder(playerID, pCity)
@@ -233,6 +231,25 @@ function ChangeDiplomaticFavor(playerID, pNewFavor)
 		pPlayer:GetDiplomacy():ChangeFavor(pNewFavor);
 	end	
 end
+function ForceDiplomacy(playerID, amount)
+	local pPlayer = Players[playerID];
+	if pPlayer and pPlayer:GetDiplomacy().ChangeFavor ~= nil then
+		pPlayer:GetDiplomacy():ChangeFavor(amount);
+	end
+end
+function RestoreMovement(playerID, unitID)
+	local pUnit = UnitManager.GetUnit(playerID, unitID);
+	if pUnit ~= nil then
+		UnitManager.RestoreMovement(pUnit);
+		UnitManager.ChangeMovesRemaining(pUnit, 100);
+	end
+end
+function KillUnit(playerID, unitID)
+	local pUnit = UnitManager.GetUnit(playerID, unitID);
+	if pUnit ~= nil then
+		UnitManager.Kill(pUnit);
+	end
+end
 function ChangeGovPoints(playerID, pNewGP)
 	local pPlayer = Players[playerID];
 	pPlayer:GetGovernors():ChangeGovernorPoints(pNewGP);
@@ -247,7 +264,11 @@ function RevealAll(playerID)
 end
 function SetValues(playerID, cityID)
 	iPlayer = playerID
-	iCity = cityID	
+	iCity = cityID
+	if (ExposedMembers.MOD_CheatMenu) then
+		ExposedMembers.MOD_CheatMenu.iPlayer = playerID;
+		ExposedMembers.MOD_CheatMenu.iCity = cityID;
+	end
 end
 
 -- // ----------------------------------------------------------------------------------------------
@@ -289,6 +310,9 @@ function Initialize()
 	ExposedMembers.MOD_CheatMenu.UnitHealAllChange = UnitHealAllChange;
 	ExposedMembers.MOD_CheatMenu.UnitAddMovement = UnitAddMovement;
 	ExposedMembers.MOD_CheatMenu.RestoreCityHealth = RestoreCityHealth;
+	ExposedMembers.MOD_CheatMenu.ForceDiplomacy = ForceDiplomacy;
+	ExposedMembers.MOD_CheatMenu.RestoreMovement = RestoreMovement;
+	ExposedMembers.MOD_CheatMenu.KillUnit = KillUnit;
 	ExposedMembers.MOD_CheatMenu_Initialized = true;
 	print( "Cheat Menu Initialization Started" );
 end

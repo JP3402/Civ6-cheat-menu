@@ -153,6 +153,25 @@
 						</GridButton>
 					</Stack>
 				</Grid>
+				<Grid	ID="ButtonGroup8" Anchor="C,T" Offset="0,0" Size="445,46" >
+					<Stack				ID="ButtonStack8" Anchor="C,C" Offset="0,0" StackGrowth="Right" StackPadding="8" >
+						<Button 		ID="CheatButtonForceDiplo" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_FORCE_DIPLO">
+							<Label 		String="[ICON_FAVOR]" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+						<Button 		ID="CheatButtonRestoreMov" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_RESTORE_MOV">
+							<Label 		String="[ICON_Movement]" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+						<Button 		ID="CheatButtonKillUnit" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_KILL_UNIT">
+							<Label 		String="[ICON_SKULL]" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+						<Button 		ID="CheatButtonMakeFreeCity" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_MAKE_FREE_CITY">
+							<Image 		Icon="ICON_CITYSTATE_MILITARY" Size="27,27" Anchor="C,C" Offset="-1,-1"/>
+						</Button>
+						<Button 		ID="CheatButtonControlAll" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_CONTROL_ALL_TOOLTIP">
+							<Label 		ID="ControlAllLabel" String="[ICON_Capital]" Color="200,200,200,255" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+					</Stack>
+				</Grid>
 			</Stack>
 		</Container>
 		</Box>
@@ -161,6 +180,10 @@
 			<Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
 		</Box>
 		<Box ID="ButtonSep2" Color="143,122,82,200" Anchor="L,T" Size="parent+5,2" Offset="0,107" Hidden="1" >
+            <Box Color="0,0,0,200" Anchor="L,T" Size="parent,1" AnchorSide="I,O"/>
+            <Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
+        </Box>
+		<Box ID="ButtonSep6" Color="143,122,82,200" Anchor="L,T" Size="parent+5,2" Offset="0,355" Hidden="1" >
             <Box Color="0,0,0,200" Anchor="L,T" Size="parent,1" AnchorSide="I,O"/>
             <Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
         </Box>
