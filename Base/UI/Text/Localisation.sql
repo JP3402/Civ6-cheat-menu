@@ -46,7 +46,13 @@ VALUES
 		("LOC_RAZE_CITY_EXPLANATION",				"en_US",		"Raze city clearing it and all its districts and buildings from the map."),
 		("LOC_KEEP_CITY_EXPLANATION",				"en_US",		"Keep this city in your empire for now."),
 		("LOC_DESTROY_CITY_LIBERATE_EXPLANATION",	"en_US",		"Liberating a city will return it to one of their previous owners, possibly bringing that civilization back into the game."),
-		
+		("LOC_CHEAT_MENU_FORCE_DIPLO",				"en_US",		"Add +100 Diplomatic Favor to Selected Player"),
+		("LOC_CHEAT_MENU_RESTORE_MOV",				"en_US",		"Restore Movement to Selected Unit (+100)"),
+		("LOC_CHEAT_MENU_KILL_UNIT",				"en_US",		"Kill Selected Unit"),
+		("LOC_CHEAT_MENU_MAKE_FREE_CITY",			"en_US",		"Make Selected City a FREE City"),
+		("LOC_CHEAT_MENU_CONTROL_ALL",				"en_US",		"Control Other Civs Mode"),
+		("LOC_CHEAT_MENU_CONTROL_ALL_TOOLTIP",		"en_US",		"Toggle to make cheats apply to the owner of the selected unit/city instead of yourself."),
+
 -- Italian --------------------------------------------------------------------------------------------------
 		("LOC_CHEAT_MENU_ABOUT",  					"it_IT",		"Cheat Panel By [Sparrow]"),
 		("LOC_CHEAT_EXPAND_MAX",  					"it_IT",		"Hide Advanced Panel"),
