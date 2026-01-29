@@ -167,9 +167,27 @@
 						<Button 		ID="CheatButtonMakeFreeCity" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_MAKE_FREE_CITY">
 							<Image 		Icon="ICON_CITYSTATE_MILITARY" Size="27,27" Anchor="C,C" Offset="-1,-1"/>
 						</Button>
+						<Button 		ID="CheatButtonCedeCity" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_CEDE_CITY">
+							<Image 		Icon="ICON_CAPITAL" Size="27,27" Anchor="C,C" Offset="-1,-1"/>
+						</Button>
 						<Button 		ID="CheatButtonControlAll" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_CONTROL_ALL_TOOLTIP">
 							<Label 		ID="ControlAllLabel" String="[ICON_Capital]" Color="200,200,200,255" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
 						</Button>
+					</Stack>
+				</Grid>
+				<Grid	ID="ButtonGroup9" Anchor="C,T" Offset="0,0" Size="445,46" >
+					<Stack				ID="ButtonStack9" Anchor="C,C" Offset="0,0" StackGrowth="Right" StackPadding="8" >
+						<Button 		ID="CheatButtonForceWar" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_FORCE_WAR">
+							<Label 		String="[ICON_WAR]" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+						<Button 		ID="CheatButtonForcePeace" Offset="0,15" Texture="LaunchBar_Hook_ButtonSmall.dds" Style="ButtonDisabledText" Size="40,40" Anchor="C,C" ToolTip="LOC_CHEAT_MENU_FORCE_PEACE">
+							<Label 		String="[ICON_PEACE]" TextAnchor="C,C" Style="FontNormal16" Size="26,26" Anchor="C,C" Offset="0,0"/>
+						</Button>
+						<Grid 			Anchor="C,C" Offset="0,15" Texture="Controls_WindowLight" SliceTextureSize="34,34" SliceCorner="17,17" Size="65,26" ToolTip="LOC_CHEAT_MENU_TARGET_PLAYER">
+							<Grid 		Anchor="C,C" Texture="Controls_TextArea" SliceTextureSize="22,22" SliceCorner="11,20" Size="65,26">
+								<EditBox	ID="TargetPlayerID" Offset="5,0" Style="FontNormal14" FontStyle="Stroke" NumberInput="1" EditMode="1" String="0" Size="parent-5,parent" Anchor="C,C" MaxLength="2" ConsumeMouse="1" HighlightColor="25,120,154,200"/>
+							</Grid>
+						</Grid>
 					</Stack>
 				</Grid>
 			</Stack>
@@ -180,6 +198,10 @@
 			<Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
 		</Box>
 		<Box ID="ButtonSep2" Color="143,122,82,200" Anchor="L,T" Size="parent+5,2" Offset="0,107" Hidden="1" >
+            <Box Color="0,0,0,200" Anchor="L,T" Size="parent,1" AnchorSide="I,O"/>
+            <Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
+        </Box>
+		<Box ID="ButtonSep7" Color="143,122,82,200" Anchor="L,T" Size="parent+5,2" Offset="0,395" Hidden="1" >
             <Box Color="0,0,0,200" Anchor="L,T" Size="parent,1" AnchorSide="I,O"/>
             <Box Color="0,0,0,200" Anchor="L,B" Size="parent,1" AnchorSide="I,O"/>
         </Box>

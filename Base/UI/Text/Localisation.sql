@@ -50,6 +50,10 @@ VALUES
 		("LOC_CHEAT_MENU_RESTORE_MOV",				"en_US",		"Restore Movement to Selected Unit (+100)"),
 		("LOC_CHEAT_MENU_KILL_UNIT",				"en_US",		"Kill Selected Unit"),
 		("LOC_CHEAT_MENU_MAKE_FREE_CITY",			"en_US",		"Make Selected City a FREE City"),
+		("LOC_CHEAT_MENU_CEDE_CITY",				"en_US",		"Transfer Selected City to You"),
+		("LOC_CHEAT_MENU_FORCE_WAR",				"en_US",		"Force War between Selected and Target ID"),
+		("LOC_CHEAT_MENU_FORCE_PEACE",				"en_US",		"Force Peace between Selected and Target ID"),
+		("LOC_CHEAT_MENU_TARGET_PLAYER",			"en_US",		"Target Player ID"),
 		("LOC_CHEAT_MENU_CONTROL_ALL",				"en_US",		"Control Other Civs Mode"),
 		("LOC_CHEAT_MENU_CONTROL_ALL_TOOLTIP",		"en_US",		"Toggle to make cheats apply to the owner of the selected unit/city instead of yourself."),
 

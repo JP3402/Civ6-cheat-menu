@@ -291,6 +291,29 @@ function KillUnit()
 	end
 end
 
+function ForceWar()
+	local sourceID = GetCurrentTargetPlayerID();
+	local targetID = tonumber(Controls.TargetPlayerID:GetText());
+	if pPlayer:IsHuman() and targetID ~= nil then
+		ExposedMembers.MOD_CheatMenu.ForceWar(sourceID, targetID);
+	end
+end
+
+function ForcePeace()
+	local sourceID = GetCurrentTargetPlayerID();
+	local targetID = tonumber(Controls.TargetPlayerID:GetText());
+	if pPlayer:IsHuman() and targetID ~= nil then
+		ExposedMembers.MOD_CheatMenu.ForcePeace(sourceID, targetID);
+	end
+end
+
+function CedeCityCheat()
+	local pCity = UI.GetHeadSelectedCity();
+	if pCity ~= nil and pPlayer:IsHuman() then
+		ExposedMembers.MOD_CheatMenu.CedeCity(pCity:GetOwner(), pCity:GetID(), Game.GetLocalPlayer());
+	end
+end
+
 function MakeFreeCityCheat()
 	local targetID = GetCurrentTargetPlayerID();
 	if pPlayer:IsHuman() and ExposedMembers.MOD_CheatMenu.iCity then

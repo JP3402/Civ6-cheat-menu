@@ -250,6 +250,25 @@ function KillUnit(playerID, unitID)
 		UnitManager.Kill(pUnit);
 	end
 end
+function ForceWar(sourceID, targetID)
+	local pSource = Players[sourceID];
+	if pSource and pSource:GetDiplomacy() then
+		pSource:GetDiplomacy():DeclareWarOn(targetID, 0); -- 0 for Surprise War
+	end
+end
+function ForcePeace(sourceID, targetID)
+	local pSource = Players[sourceID];
+	if pSource and pSource:GetDiplomacy() then
+		pSource:GetDiplomacy():MakePeaceWith(targetID);
+	end
+end
+function CedeCity(ownerID, cityID, newOwnerID)
+	local pOwner = Players[ownerID];
+	local pCity = pOwner:GetCities():FindID(cityID);
+	if pCity ~= nil then
+		CityManager.TransferCity(pCity, newOwnerID, 0); -- 0 for BY_GIFT / Transfer
+	end
+end
 function ChangeGovPoints(playerID, pNewGP)
 	local pPlayer = Players[playerID];
 	pPlayer:GetGovernors():ChangeGovernorPoints(pNewGP);
@@ -313,6 +332,9 @@ function Initialize()
 	ExposedMembers.MOD_CheatMenu.ForceDiplomacy = ForceDiplomacy;
 	ExposedMembers.MOD_CheatMenu.RestoreMovement = RestoreMovement;
 	ExposedMembers.MOD_CheatMenu.KillUnit = KillUnit;
+	ExposedMembers.MOD_CheatMenu.ForceWar = ForceWar;
+	ExposedMembers.MOD_CheatMenu.ForcePeace = ForcePeace;
+	ExposedMembers.MOD_CheatMenu.CedeCity = CedeCity;
 	ExposedMembers.MOD_CheatMenu_Initialized = true;
 	print( "Cheat Menu Initialization Started" );
 end
